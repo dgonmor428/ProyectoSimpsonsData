@@ -1,2 +1,2 @@
 # ProyectoSimpsonsData
-## Documentación dividida
+## Info de usuarios
