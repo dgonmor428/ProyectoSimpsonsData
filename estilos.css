@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0d0d1a;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /*Para la animación de la página para aparecer
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;*/
+}
+/*header*/
+header {
+    background-color: #BEC8F7;
+    color: black;
+    padding: 10px 20px;
+
+}
+
+header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.cabezera {
+    display: flex;
+    align-items: center;
+}
+
+.imagen-cabecera img{
+    width: 80px;
+    height: auto;
+    margin-right: 10px;
+    animation: bombeo 2s infinite;
+}
+
+/*Main principal*/
+main {
+    display: flex;
+    flex-direction: column;
+    flex: 1; 
+    background-color: #0d0d1a;
+}
+/*Main index*/
+.introduccion{
+    text-align: center;
+    color: #ffffff;
+    background-color: #000000;
+    padding: 35px;
+    font-family: 'Exo 2', sans-serif;
+}
+.introduccion p{
+    color: #cccccc;
+    font-family: 'Exo 2', sans-serif;
+}
+/*Pregunta*/
+.pregunta p{
+    margin-left: 22px;
+    color: #BEC8F7;
+    font-family: 'Exo 2', sans-serif;
+}
+/*Los grids que se dirige a otra pagina*/
+.grids {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 20px;
+    background-color: #0d0d1a;
+}
+.imagen {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.icono {
+    width: 50px; 
+    display: flex;
+    justify-content: right;
+
+}
+.tarjeta {
+    background-color: #1a1a2e;
+    border: 2px solid rgba(190,200,247,0.2);
+    border-radius: 13px;
+    padding: 24px;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Exo 2', sans-serif;
+}
+.tarjeta p{
+    color: #cccccc;
+    font-family: 'Exo 2', sans-serif;
+}
+.tarjeta:hover{
+    background-color: #27273d;
+    border-color: #BEC8F7;
+    transition: transform 0.3s; 
+    transform: scale(1.05);
+}
+
+/*Footer*/
+footer{
+    background-color: #FDD835;
+    color: #1E88E5;
+    text-align: center;
+}
+footer img{
+    width: 260px;
+    margin-top: 10px;
+}
+
+.nombre{
+    color: #1E88E5;
+    font-family: 'Exo 2', sans-serif;
+    text-align: center;
+}
+
+.derechos-autor{
+    color: #aaaaaa;
+    font-family: 'Exo 2', sans-serif;
+}
+hr{
+    border-color: rgba(255, 255, 255, 0)
+}
+
