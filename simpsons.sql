@@ -43,12 +43,64 @@ CONSTRAINT PRIMARY KEY (codigo)
 
 --Badulaque
 INSERT INTO Baduluque (codigo, nombre_producto) 
-VALUES (1, 'Fresisuis de fresa');
+VALUES (10, 'Fresisuis de fresa');
+
+INSERT INTO Baduluque (codigo, nombre_producto) 
+VALUES (20, 'Buzz Cola');
+
+INSERT INTO Baduluque (codigo, nombre_producto) 
+VALUES (30, 'Krusty Os');
+
+INSERT INTO Baduluque (codigo, nombre_producto) 
+VALUES (40, 'Rosquillas');
+
+INSERT INTO Baduluque (codigo, nombre_producto) 
+VALUES (50, 'Armas para suicidarse');
+
+INSERT INTO Baduluque (codigo, nombre_producto) 
+VALUES (60, 'Revistas Playtío');
+
+INSERT INTO Baduluque (codigo, nombre_producto) 
+VALUES (70, 'Salchichas del suelo');
+
+INSERT INTO Baduluque (codigo, nombre_producto) 
+VALUES (80, 'Gambas a punto de caducar');
+
+INSERT INTO Baduluque (codigo, nombre_producto) 
+VALUES (90, 'Jasper en el congelador');
+
+INSERT INTO Baduluque (codigo, nombre_producto) 
+VALUES (100, 'Jamon rancio');
+
 
 
 --Bar de Moe
 INSERT INTO Bar_Moe (codigo, nombre_producto) 
-VALUES (101, 'Cerveza Duff');
+VALUES (1010, 'Cerveza Duff');
+
+INSERT INTO Bar_Moe (codigo, nombre_producto) 
+VALUES (1011, 'Flambeado de Moe');
+
+INSERT INTO Bar_Moe (codigo, nombre_producto) 
+VALUES (1012, 'Moe et Chandon');
+
+INSERT INTO Bar_Moe (codigo, nombre_producto) 
+VALUES (1013, 'Coctel Olvidalotodo');
+
+INSERT INTO Bar_Moe (codigo, nombre_producto) 
+VALUES (1014, 'Leche(pintura)');
+
+INSERT INTO Bar_Moe (codigo, nombre_producto) 
+VALUES (1015, 'Huevos en Salmuera');
+
+INSERT INTO Bar_Moe (codigo, nombre_producto) 
+VALUES (1016, 'Leche(real)');
+
+INSERT INTO Bar_Moe (codigo, nombre_producto) 
+VALUES (1017, 'Patatas millonarias de cumpleaños del tío Moe');
+
+INSERT INTO Bar_Moe (codigo, nombre_producto) 
+VALUES (1018, 'Comida casera de la buena. Frita a la perfección');
 
 --La mazmorra del androide
 INSERT INTO Tienda_Comics (codigo, nombre_comic, serie_comic, numero_paginas) 
