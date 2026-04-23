@@ -19,8 +19,84 @@ const pool_mysql = mysql.createPool({
      port: 3306,                     // Puerto al que nos conectamos en MySQL 
      user: "root",                   // Usuario al que nos conectamos 
      password: "",                   // Contraseña del usuario al que nos conectamos 
-     database: "ejemplo_usuarios",   // Nombre de la base de datos que nos conectamos 
+     database: "simpsons",   // Nombre de la base de datos que nos conectamos 
      waitForConnections: true,       // Hace que las nuevas peticiones esperan en cola hasta que haya una conexión libre. Si vale false esas nuevas peticiones fallan 
      connectionLimit: 10,            // Define el máximo de conexiones simultáneas al servidor MySQL 
      queueLimit: 0                   // Define el límite de peticiones en espera. El valor 0 define una cola infinita 
 });
+
+server.get("/", (req, res) => {
+    res.send("Servidor funcionando correctamente. Ve a /usuarios para ver los datos.");
+});
+
+server.get("/badulaque", (req, res) => {
+    const ciudad = req.query.ciudad;
+    let valores = [];
+    let sql = "SELECT * FROM Badulaque";
+
+    if (ciudad) {
+        sql += " WHERE ciudad = ?";
+        valores.push(ciudad);
+    }
+
+    
+    pool_mysql.query(sql, valores, (error, resultados) => {
+        if (error) {
+            console.error("Error en la consulta:", error);
+            return res.status(500).json({ 
+                mensaje: "Error al consultar la base de datos",
+                detalle: error.message 
+            });
+        }
+        res.json(resultados);
+    });
+});
+
+
+server.get("/barMoe", (req, res) => {
+    const ciudad = req.query.ciudad;
+    let valores = [];
+    let sql = "SELECT * FROM Bar_Moe";
+
+    if (ciudad) {
+        sql += " WHERE ciudad = ?";
+        valores.push(ciudad);
+    }
+
+    
+    pool_mysql.query(sql, valores, (error, resultados) => {
+        if (error) {
+            console.error("Error en la consulta:", error);
+            return res.status(500).json({ 
+                mensaje: "Error al consultar la base de datos",
+                detalle: error.message 
+            });
+        }
+        res.json(resultados);
+    });
+});
+
+
+
+function iniciarServidor() {
+    pool_mysql.getConnection((error, connection) => {
+        if (error) {
+            console.error("--- ERROR DE CONEXIÓN ---");
+            console.error("No se pudo conectar a MySQL. Revisa si el servicio está activo o si el puerto/password son correctos.");
+            console.error("Detalle:", error.code);
+            process.exit(1);
+        }
+        
+        // Si llegamos aquí, la conexión es correcta
+        connection.release();
+        server.listen(PORT, () => {
+            console.log(`Bienvenido al Badulaque http://localhost:${PORT}`);
+            console.log(`Endpoint de productos de calidad dudosa en el badulaque: http://localhost:${PORT}/badulaque`);
+            console.log(`Endpoint de cogorzas baratas: http://localhost:${PORT}/barMoe`);
+        });
+        
+    });
+}
+
+
+iniciarServidor();
