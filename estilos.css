@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Simpson';
-    src: url('../fonts/simpsonfont/Simpsonfont\ DEMO.otf');
+    src: url('./fonts/simpsonfont/Simpsonfont\ DEMO.otf');
 }
 
 
@@ -322,7 +322,7 @@ footer img{
 }
 
 .bardemoe-CRUD{
-    font-family: 'Simpson';
+    font-family:'Simpson';
     color:#ffffff;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -330,14 +330,14 @@ footer img{
     width: 150px;
     height: 80px;
     border-radius: 10px;
-    background-color:#3A8242;
+    background-color:#b40f0f;
     cursor: pointer;
-    transition: color #864a00;
+    transition: color #e09d0c;
      box-shadow: 5px 10px 8px rgba(0, 0, 0, 0.5);
  
 }
 .bardemoe-CRUD:hover{
-    color:#864a00;
+    color:#e09d0c;
    
 }
 
