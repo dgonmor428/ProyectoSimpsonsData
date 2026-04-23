@@ -29,7 +29,7 @@ server.get("/", (req, res) => {
     res.send("Servidor funcionando correctamente. Ve a /usuarios para ver los datos.");
 });
 
-server.get("/badulaque", (req, res) => {
+server.get("/Badulaque", (req, res) => {
     const ciudad = req.query.ciudad;
     let valores = [];
     let sql = "SELECT * FROM Badulaque";
