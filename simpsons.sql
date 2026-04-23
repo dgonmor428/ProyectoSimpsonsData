@@ -3,14 +3,14 @@ CREATE DATABASE IF NOT EXISTS simpsons;
 USE simpsons;
 
 -- 1.  Badulaque
-CREATE TABLE Badulaque (
+CREATE TABLE badulaque (
     codigo INT,
     nombre_producto VARCHAR(255) NOT NULL,
     CONSTRAINT PRIMARY KEY (codigo)
 ) ENGINE=INNODB;
 
 -- 2. Tabla Bar de Moe
-CREATE TABLE Bar_Moe (
+CREATE TABLE bar_Moe (
     codigo INT,
     nombre_producto VARCHAR(255) NOT NULL,
     CONSTRAINT PRIMARY KEY (codigo)
@@ -70,7 +70,7 @@ CREATE TABLE Personajes_Principales_beben_Bar_Moe (
 ---
 
 -- Badulaque
-INSERT INTO Badulaque (codigo, nombre_producto) VALUES 
+INSERT INTO badulaque (codigo, nombre_producto) VALUES 
 (10, 'Fresisuis de fresa'),
 (20, 'Buzz Cola'),
 (30, 'Krusty Os'),
