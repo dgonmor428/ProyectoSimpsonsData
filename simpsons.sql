@@ -96,8 +96,18 @@ INSERT INTO Bar_Moe (codigo, nombre_producto) VALUES
 
 -- Tienda de Comics
 INSERT INTO Tienda_Comics (codigo, nombre_comic, serie_comic, numero_paginas) 
-VALUES (50, 'Simpsons Comics #1', 'Simpsons Comics', 29);
-
+VALUES 
+(500, 'Simpsons Comics #1', 'Simpsons Comics', 29),
+(501, 'La casa arbol del terror #7', 'Simpsons Comics', 29),
+(502, 'Simpsons Comics #139', 'Simpsons Comics', 29),
+(503, 'Simpsons Comics #139', 'Simpsons Comics', 29),
+(504, 'Simpsons Comics #28', 'Simpsons Comics', 29),
+(505, 'Bartman #2', 'Simpsons Comics', 29),
+(50, 'Simpsons Comics #4', 'Simpsons Comics', 29),
+(50, 'Casa arbol del terror #3', 'Simpsons Comics', 29),
+(50, 'Bartman #22', 'Simpsons Comics', 29),
+(50, 'Radioactivo-Man #2', 'Simpsons Comics', 29),
+(50, 'Rasca y pica #1', 'Simpsons Comics', 29),
 -- Personajes Principales
 INSERT INTO Personajes_Principales (codigo_personaje, nombre, apellido1, madre, padre, actor_doblaje, primera_aparicion) VALUES 
 (1, 'Homer', 'Simpson', 'Mona', 'Abraham', 'Carlos Ysbert', 'El show de Tracey Ullman'),
