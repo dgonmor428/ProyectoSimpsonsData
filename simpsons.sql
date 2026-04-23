@@ -36,7 +36,31 @@ primera_aparicion VARCHAR(255) NOT NULL,
 CONSTRAINT PRIMARY KEY (codigo)
 )ENGINE=INNODB;
 
---Faltan poner las relaciones entre las tablas (ver en el MER)
+CREATE TABLE Personajes_Principales_compra_Baduluque (
+    codigo_personaje INT,
+    codigo_badulaque INT,
+    PRIMARY KEY (codigo_personaje, codigo_badulaque),
+    FOREIGN KEY (codigo_personaje) REFERENCES Personajes_Principales(codigo_personaje),
+    FOREIGN KEY (codigo_badulaque) REFERENCES Baduluque(codigo)
+) ENGINE=INNODB;
+
+
+CREATE TABLE Personajes_Principales_compra_Tienda_Comics (
+    codigo_personaje INT,
+    codigo_tienda_comics INT,
+    PRIMARY KEY (codigo_personaje, codigo_tienda_comics),
+    FOREIGN KEY (codigo_personaje) REFERENCES Personajes_Principales(codigo_personaje),
+    FOREIGN KEY (codigo_tienda_comics) REFERENCES Tienda_Comics(codigo)
+) ENGINE=INNODB;
+
+
+CREATE TABLE Personajes_Principales_beben_Bar_Moe (
+    codigo_personaje INT,
+    codigo_bar_moe INT,
+    PRIMARY KEY (codigo_personaje, codigo_bar_moe),
+    FOREIGN KEY (codigo_personaje) REFERENCES Personajes_Principales(codigo_personaje),
+    FOREIGN KEY (codigo_bar_moe) REFERENCES Bar_Moe(codigo)
+) ENGINE=INNODB;
 
 
 --Inserto 
