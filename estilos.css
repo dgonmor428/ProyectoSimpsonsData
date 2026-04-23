@@ -188,7 +188,7 @@ footer img{
         min-height: 90vh;                  
         display: flex;                      
         flex-direction: column;            
-        background-color: #9DB6C6;
+        background-color: #c6b39d;
 }
 
   .badulaque-main {
@@ -263,6 +263,80 @@ footer img{
  
 }
 .badulaque-CRUD:hover{
+    color:#864a00;
+   
+}
+
+/*Estilos del Bar de Moe (Alejandro)*/
+.bardemoe-body {
+        min-height: 90vh;                  
+        display: flex;                      
+        flex-direction: column;            
+        background-color: #3d2506;
+}
+
+  .bardemoe-main {
+        flex: 1;         
+        display: flex;
+        width: 96%;
+        height: 70vh;
+        border-radius: 10px;
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+        margin: 20px;
+        background-color: #430249;
+        border: 4px solid #333;
+    }
+
+.bardemoe-header {
+    
+   font-size: larger;
+    color: #FED41D;
+    padding: 10px 20px;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+
+}
+
+.bardemoe-header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+
+
+
+.bardemoe-contenedor{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    background-color: #00351a;
+    width: 20%;
+}
+
+.bardemoe-botones{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.bardemoe-CRUD{
+    font-family: 'Simpson';
+    color:#ffffff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 40px;
+    width: 150px;
+    height: 80px;
+    border-radius: 10px;
+    background-color:#3A8242;
+    cursor: pointer;
+    transition: color #864a00;
+     box-shadow: 5px 10px 8px rgba(0, 0, 0, 0.5);
+ 
+}
+.bardemoe-CRUD:hover{
     color:#864a00;
    
 }
