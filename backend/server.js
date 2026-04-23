@@ -87,7 +87,7 @@ function iniciarServidor() {
             process.exit(1);
         }
         
-        // Si llegamos aquí, la conexión es correcta
+        
         connection.release();
         server.listen(PORT, () => {
             console.log(`Bienvenido al Badulaque http://localhost:${PORT}`);
