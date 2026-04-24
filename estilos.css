@@ -3,7 +3,6 @@
     src: url('./fonts/simpsonfont/Simpsonfont\ DEMO.otf');
 }
 
-
 body {
     font-family: Arial, sans-serif;
     background-color: #1A1A2E;
@@ -11,10 +10,11 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     min-height: 100vh;
-    /*Para la animación de la página para aparecer
+    /*Para la animación de la página para aparecer*/
     opacity: 0;
-    transition: opacity 0.25s ease-in-out;*/
+    transition: opacity 0.25s ease-in-out;
 }
 /*header*/
 header {
@@ -66,8 +66,10 @@ main {
 .botones{
     font-family: Simpsons;
     display: flex;
+    justify-content: center;
     gap: 200px;
     margin-left: 16px;
+    padding: auto;
 }
 .botones img{
     width: 100%;
@@ -76,45 +78,53 @@ main {
     animation: bombeo 1.5s infinite 1.05s;
 }
 .boton1{
-    height: 200px;
-    width: 200px;
-    border-radius: 100px;
+    height: 170px;
+    width: 170px;
+    border-radius: 50%;
+    border-style: solid;
     border-color: #FED41D;
     border-width: 10px;
     box-shadow: 1px 20px 6px rgba(254, 212, 29, 0.5);
     animation: salidasBotones 1s ease-in-out;
     margin-top: 4%;
+    cursor: pointer;
 }
 .boton2{
-    height: 200px;
-    width: 200px;
-    border-radius: 100px;
+    height: 170px;
+    width: 170px;
+    border-radius: 50%;
+    border-style: solid;
     border-color: #FED41D;
     border-width: 10px;
     box-shadow: 1px 20px 6px rgba(254, 212, 29, 0.5);
     animation: salidasBotones 1s ease-in-out;
     margin-top: 14%;
     margin-bottom: 1%;
+    cursor: pointer;
 }
 .boton3{
-    height: 200px;
-    width: 200px;
-    border-radius: 100px;
+    height: 170px;
+    width: 170px;
+    border-radius: 50%;
+    border-style: solid;
     border-color: #FED41D;
     border-width: 10px;
     box-shadow: 1px 20px 6px rgba(254, 212, 29, 0.5);
     animation: salidasBotones 1s ease-in-out;
     margin-top: 1%;
+    cursor: pointer;
 }
 .boton4{
-    height: 200px;
-    width: 200px;
-    border-radius: 100px;
+    height: 170px;
+    width: 170px;
+    border-radius: 50%;
+    border-style: solid;
     border-color: #FED41D;
     border-width: 10px;
     box-shadow: 1px 20px 6px rgba(254, 212, 29, 0.5);
     animation: salidasBotones 1s ease-in-out;
     margin-top: 10%;
+    cursor: pointer;
 }
 
 .botones button:hover{
@@ -185,23 +195,30 @@ footer img{
 /*Estilos del Badulaque (Alejandro)*/
 
 .badulaque-body {
-        min-height: 90vh;                  
-        display: flex;                      
-        flex-direction: column;            
-        background-color: #c6b39d;
+    font-family: Arial, sans-serif;
+    background-color: #c6b39d;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /*Para la animación de la página para aparecer*/
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;         
+
 }
 
-  .badulaque-main {
-        flex: 1;         
-        display: flex;
-        width: 96%;
-        height: 70vh;
-        border-radius: 10px;
-        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
-        margin: 20px;
-        background-color: #F2B880;
-        border: 4px solid #333;
-    }
+.badulaque-main {
+    flex: 1;         
+    display: flex;
+    width: 96%;
+    height: 70vh;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    background-color: #F2B880;
+    border: 4px solid #333;
+}
 
 .badulaque-header {
     
@@ -217,7 +234,7 @@ footer img{
 .badulaque-header h1 {
     font-size: 1.5rem;
     margin: 0;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Simpsons';
 }
 
 
@@ -269,23 +286,30 @@ footer img{
 
 /*Estilos del Bar de Moe (Alejandro)*/
 .bardemoe-body {
-        min-height: 90vh;                  
-        display: flex;                      
-        flex-direction: column;            
-        background-color: #3d2506;
+    font-family: Arial, sans-serif;
+    background-color: #3d2506;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /*Para la animación de la página para aparecer*/
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;            
+
 }
 
-  .bardemoe-main {
-        flex: 1;         
-        display: flex;
-        width: 96%;
-        height: 70vh;
-        border-radius: 10px;
-        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
-        margin: 20px;
-        background-color: #430249;
-        border: 4px solid #333;
-    }
+.bardemoe-main {
+    flex: 1;         
+    display: flex;
+    width: 96%;
+    height: 70vh;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    background-color: #430249;
+    border: 4px solid #333;
+}
 
 .bardemoe-header {
     
@@ -301,11 +325,8 @@ footer img{
 .bardemoe-header h1 {
     font-size: 1.5rem;
     margin: 0;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Simpsons';
 }
-
-
-
 
 .bardemoe-contenedor{
     display: flex;
@@ -341,9 +362,174 @@ footer img{
    
 }
 
+/*Estilos Personajes (David)*/
 
+.personajes-body {
+    font-family: Arial, sans-serif;
+    background-color: #87CEEB;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;         
+}
 
+.personajes-main {
+    flex: 1;         
+    display: flex;
+    width: 96%;
+    height: 70vh;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    background-color: #FED41D;
+    border: 4px solid #333;
+}
 
+.personajes-header {
+    font-size: larger;
+    color: #1A1A2E;
+    padding: 10px 20px;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+}
 
+.personajes-header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+}
 
+.cabecera {
+    display: flex;
+    align-items: center;
+}
 
+.imagen-cabecera img{
+    width: 400px;
+    height: auto;
+    margin-right: 10px;
+    animation: bombeo 2s infinite;
+}
+
+.personajes-contenedor{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    background-color: #FED41D;
+    width: 20%;
+}
+
+.personajes-botones{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.personajes-CRUD{
+    font-family: 'Simpson';
+    color: #ffffff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 40px;
+    width: 150px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: #D12B2B;
+    cursor: pointer;
+    transition: color #FED41D;
+    box-shadow: 5px 10px 8px rgba(0, 0, 0, 0.5);
+}
+
+.personajes-CRUD:hover{
+    color: #FED41D;
+}
+
+/*Estilos Tienda de Comics (David)*/
+
+.comics-body {
+    font-family: Arial, sans-serif;
+    background-color: #1a0033;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;         
+}
+
+.comics-main {
+    flex: 1;         
+    display: flex;
+    width: 96%;
+    height: 70vh;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    background-color: #2d0057;
+    border: 4px solid #FED41D;
+}
+
+.comics-header {
+    font-size: larger;
+    color: #FED41D;
+    padding: 10px 20px;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.comics-header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.cabecera {
+    display: flex;
+    align-items: center;
+}
+
+.imagen-cabecera img{
+    width: 400px;
+    height: auto;
+    margin-right: 10px;
+    animation: bombeo 2s infinite;
+}
+
+.comics-contenedor{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    background-color: #2d0057;
+    width: 20%;
+}
+
+.comics-botones{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comics-CRUD{
+    font-family: 'Simpson';
+    color: #ffffff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 40px;
+    width: 150px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: #6a0dad;
+    cursor: pointer;
+    transition: color #FED41D;
+    box-shadow: 5px 10px 8px rgba(0, 0, 0, 0.5);
+}
+
+.comics-CRUD:hover{
+    color: #FED41D;
+}
