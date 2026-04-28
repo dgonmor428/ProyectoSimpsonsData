@@ -99,7 +99,7 @@ main {
     box-shadow: 1px 20px 6px rgba(254, 212, 29, 0.5);
     animation: salidasBotones 1s ease-in-out;
     margin-top: 14%;
-    margin-bottom: 1%;
+    margin-bottom: 5%;
     cursor: pointer;
 }
 .boton3{
@@ -532,4 +532,183 @@ footer img{
 
 .comics-CRUD:hover{
     color: #FED41D;
+}
+
+/*Estilos Sobre Nosotros (David)*/
+.introduccion-nosotros{
+    text-align: center;
+    color: #1A1A2E;
+    background-color: #FED41D;
+    padding: 35px;
+    font-family: 'Simpson', sans-serif;
+}
+.introduccion-nosotros h1{
+    display: inline;
+}
+.introduccion-nosotros p{
+    color: #1A1A2E;
+    font-family: 'Simpson', sans-serif;
+}
+.cambio-color-nosotros{
+    display: inline;
+    color: #D12B2B;
+}
+/*Lo de navegador sirve tanto para el index.html como el sobrenosotros.html*/
+.navegador {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    width: 100%;
+    font-family: 'Simpson', sans-serif;
+    font-size: small;
+}
+.navegador a {
+    text-decoration: none;
+    color: #FED41D;
+}
+.navegador a:hover {
+    color: #D12B2B;
+}
+.navegador h3:hover{
+    transition: transform 0.2s; 
+    transform: scale(1.15);
+}
+/*Parte del main (Los grids)*/
+.grids {
+    display: grid;
+    grid-template-columns: repeat( 2, 1fr);
+    gap: 40px;
+    padding: 40px;
+    background-color: #0d0d1a;
+}
+
+.grids-nosotros {
+    background-color: #1A1A2E;
+    border: 1px solid;
+    border-color: #D12B2B;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    font-family: 'Simpson', sans-serif;
+    box-shadow: 20px 20px 6px rgba(50, 00, 0, 1.5);
+}
+
+.grids-nosotros h2 {
+    color: #FED41D;
+    align-items: center;
+}
+/*Aquí me gustaría poner una foto nuestra, si no se deja nuestros nombres y ya o se elimina*/
+.avatar-nosotros {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #FED41D;
+    color: black;
+    margin: auto;
+}
+
+.campo-nosotros {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    font-size: small;
+}
+
+.caracteristicas {
+    color: #aaaaaa;
+}
+
+.resultado {
+    color: white;
+}
+/*Botón sobre mí*/
+.boton-imagen-cambiar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+.btnCambiarAtributos {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #BEC8F7;
+    color: black;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: 'Simpson', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.btnCambiarAtributos:hover {
+    background-color: #a0aee8;
+    transform: scale(1.05);
+}
+/*Tecnologías usadas (es decir, html, css, js, node y mysql lo que he usado para el proyecto)*/
+.lenguajes{
+    background-color: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    border-color: #D12B2B;
+    border-radius: 15px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    text-align: center;
+    align-items: center;
+    box-shadow: 20px 20px 6px rgba(50, 00, 0, 1.5);
+}
+.lenguajes h2{
+    color: #FED41D;
+    font-family: 'Simpson', sans-serif;
+    margin-left: 25px;
+}
+
+.lenguajes img{
+    margin-top: 20px;
+    width: 25%;
+
+}
+
+/*Navegador y texto de botones (Alejandro)*/
+
+.navegadorPage {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    font-family: 'Simpson', sans-serif;
+    font-size: small;
+    
+}
+.navegadorPage a {
+    text-decoration: none;
+    color: #FED41D;
+}
+.navegadorPage a:hover {
+    color: #D12B2B;
+}
+.navegadorPage h3:hover{
+    transition: transform 0.2s; 
+    transform: scale(1.15);
+}
+
+.texto-boton{
+   
+    font-family: 'Simpson', sans-serif;
+    margin-top: 50px;
+    color: #FED41D;
+    
+}
+
+.boton-pagina{
+    text-decoration: none;
 }
