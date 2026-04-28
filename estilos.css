@@ -712,3 +712,14 @@ footer img{
 .boton-pagina{
     text-decoration: none;
 }
+
+.CRUD-box{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mensaje p{
+    display: inline;
+}
