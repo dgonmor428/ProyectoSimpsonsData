@@ -1,134 +1,156 @@
-const express = require("express");
-const mysql = require("mysql2");
-const cors = require("cors");
-const path = require("path");
+// Importamos los módulos necesarios
+const express = require("express");    // Importa el framework para crear el servidor web
+const mysql = require("mysql2");       // Importa el cliente para conectarnos a MySQL
+const cors = require("cors");          // Importa el módulo CORS (Cross-Origin Resource Sharing), que permite que el servidor acepte solicitudes desde un dominio diferente al suyo
 
+// Creamos una instancia de Express para nuestro servidor
 const server = express();
-server.use(cors());
-server.use(express.json());
 
-const PORT = 3000;
+// Habilitamos las peticiones desde el frontend
+server.use(cors());             // Habilita CORS para evitar bloqueos en las peticiones del navegador
+server.use(express.json());     // Permite recibir datos en formato JSON en las peticiones
 
+// Definimos las constantes necesarias para la conexión con el servidor
+const PORT = 3000; // Puerto donde correrá nuestro servidor
 
-server.use(express.static(path.join(__dirname, '..')));
-
+// Creamos un pool de conexiones, que hará que las conexiones se hagan bajo demanda según se vayan necesitando
 const pool_mysql = mysql.createPool({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "",
-    database: "simpsons",
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+    host: "localhost",          // Dirección del servidor
+    port: 3306,                 // Puerto al que nos conectamos en MySQL
+    user: "root",               // Usuario al que nos conectamos
+    password: "",               // Contraseña del usuario al que nos conectamos
+    database: "simpsons",       // Nombre de la base de datos que nos conectamos
+    waitForConnections: true,   // Hace que las nuevas peticiones esperan en cola hasta que haya una conexión libre. Si vale false esas nuevas peticiones fallan
+    connectionLimit: 10,        // Define el máximo de conexiones simultáneas al servidor MySQL
+    queueLimit: 0               // Define el límite de peticiones en espera. El valor 0 define una cola infinita
 });
 
-
-server.get("/badulaque", (req, res) => {
-    const nombre = req.query.nombre;
-    let sql = "SELECT * FROM badulaque";
-    let params = [];
-    if (nombre) {
-        sql += " WHERE nombre_producto LIKE ?";
-        params.push(`%${nombre}%`);
-    }
-    pool_mysql.query(sql, params, (error, resultados) => {
+// Función para iniciar nuestro servidor
+function iniciarServidor() {
+    // Solo arrancamos el servidor cuando la BD está conectada
+    pool_mysql.getConnection((error, connection) => {
         if (error) {
-            console.error(error);
-            return res.status(500).json({ error: "Senior Homer eso no esta en mi Badulaque" });
+            console.error("Error conectando a MySQL:", error);
+            process.exit(1); // Si falla la BD, cerramos el server
         }
+        connection.release();
+        // Iniciamos el servidor en el puerto especificado
+        server.listen(PORT, () => {
+            // Confirmación en la consola de que se ha lanzado el servidor OK
+            console.log(`Conectado a MySQL. Servidor corriendo en http://localhost:${PORT}`);
+        });
+    });
+}
+
+// Llamamos a la función para que nuestro servidor se lance
+iniciarServidor();
+
+// -------------------------------------------------------
+// ENDPOINTS DE LA API
+// -------------------------------------------------------
+
+// Endpoint GET - Obtener todos los personajes (con filtro opcional por apellido)
+server.get("/personajes", (req, res) => {
+    const apellido1 = req.query.apellido1;
+    let valores = [];
+    let sql = "SELECT * FROM Personajes_Principales";
+
+    // Compruebo si existe un parámetro para filtrar por apellido
+    if (apellido1) {
+        sql += " WHERE apellido1 = ?";
+        valores.push(apellido1);
+    }
+
+    pool_mysql.query(sql, valores, (error, resultados) => {
+        if (error) {
+            console.error("Error en la consulta:", error);
+            return res.status(500).json({ error });
+        }
+
         res.json(resultados);
     });
 });
 
-server.post("/badulaque", (req, res) => {
-    const { codigo, nombre_producto } = req.body;
-    if (!codigo || !nombre_producto) {
-        return res.status(400).json({ error: "Faltan campos" });
-    }
-    const sql = "INSERT INTO Badulaque (codigo, nombre_producto) VALUES (?, ?)";
-    pool_mysql.query(sql, [codigo, nombre_producto], (error, result) => {
+// Endpoint GET - Obtener los personajes cuyo padre sea Homer
+server.get("/personajes_hijo_homer", (req, res) => {
+    const sql = "SELECT * FROM Personajes_Principales WHERE padre = 'Homer'";
+
+    pool_mysql.query(sql, (error, resultados) => {
         if (error) {
-            if (error.code === 'ER_DUP_ENTRY') {
-                return res.status(409).json({ error: "Sera posible que me intentes vender productos duplicados" });
+            console.error("Error en la consulta:", error);
+            return res.status(500).json({ error });
+        }
+
+        res.json(resultados);
+    });
+});
+
+// Endpoint POST - Insertar un nuevo personaje
+server.post("/personaje", (req, res) => {
+    // Utilizamos la variable req que contiene toda la información que envía el cliente al servidor
+    const { codigo_personaje, nombre, apellido1, madre, padre, actor_doblaje, primera_aparicion } = req.body;
+
+    const sql = `
+        INSERT INTO Personajes_Principales (codigo_personaje, nombre, apellido1, madre, padre, actor_doblaje, primera_aparicion)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    pool_mysql.query(
+        sql,
+        [codigo_personaje, nombre, apellido1, madre, padre, actor_doblaje, primera_aparicion],
+        (error, resultado) => {
+            if (error) {
+                console.error("Error en INSERT:", error);
+                return res.status(500).json({ error });
             }
-            console.error(error);
-            return res.status(500).json({ error: "No se pudo insertar" });
+
+            res.json({
+                mensaje: "Personaje insertado correctamente",
+                datos: { codigo_personaje, nombre, apellido1, madre, padre, actor_doblaje, primera_aparicion }
+            });
         }
-        res.status(201).json({ mensaje: "Grasias vuelva pronto" });
-    });
+    );
 });
 
-server.put("/badulaque/:codigo", (req, res) => {
-    const codigo = parseInt(req.params.codigo);
-    const { nombre_producto } = req.body;
-    if (!nombre_producto) {
-        return res.status(400).json({ error: "No sabe leer? nesesitas un nombre_producto" });
-    }
-    const sql = "UPDATE Badulaque SET nombre_producto = ? WHERE codigo = ?";
-    pool_mysql.query(sql, [nombre_producto, codigo], (error, result) => {
+// Endpoint PUT - Actualizar un personaje existente (clave primaria: codigo_personaje)
+server.put("/personaje/:codigo_personaje", (req, res) => {
+    // Utilizamos la variable req que contiene toda la información que envía el cliente al servidor
+    const codigo_personaje = req.params.codigo_personaje;
+    const { nombre, apellido1, madre, padre, actor_doblaje, primera_aparicion } = req.body;
+
+    const sql = `
+        UPDATE Personajes_Principales
+        SET nombre = ?, apellido1 = ?, madre = ?, padre = ?, actor_doblaje = ?, primera_aparicion = ?
+        WHERE codigo_personaje = ?
+    `;
+
+    pool_mysql.query(
+        sql,
+        [nombre, apellido1, madre, padre, actor_doblaje, primera_aparicion, codigo_personaje],
+        (error, resultado) => {
+            if (error) {
+                console.error("Error en UPDATE:", error);
+                return res.status(500).json({ error });
+            }
+
+            res.json({ mensaje: "Personaje actualizado" });
+        }
+    );
+});
+
+// Endpoint DELETE - Eliminar un personaje (clave primaria: codigo_personaje)
+server.delete("/personaje/:codigo_personaje", (req, res) => {
+    // Utilizamos la variable req que contiene toda la información que envía el cliente al servidor
+    const codigo_personaje = req.params.codigo_personaje;
+
+    const sql = "DELETE FROM Personajes_Principales WHERE codigo_personaje = ?";
+
+    pool_mysql.query(sql, [codigo_personaje], (error) => {
         if (error) {
-            console.error(error);
-            return res.status(500).json({ error: "Error al actualizar hagalo de nuevo" });
+            console.error("Error en DELETE:", error);
+            return res.status(500).json({ error });
         }
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ error: "Producto no encontrado busque mejor en los almacenes Costington" });
-        }
-        res.json({ mensaje: "Producto actualizado" });
-    });
-});
 
-server.delete("/badulaque/:codigo", (req, res) => {
-    const codigo = parseInt(req.params.codigo);
-    const sql = "DELETE FROM Badulaque WHERE codigo = ?";
-    pool_mysql.query(sql, [codigo], (error, result) => {
-        if (error) {
-            console.error(error);
-            return res.status(500).json({ error: "Error al eliminar" });
-        }
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ error: "Producto no encontrado" });
-        }
-        res.json({ mensaje: "Producto eliminado" });
-    });
-});
-
-
-server.get("/barMoe", (req, res) => {
-    const sql = "SELECT codigo, nombre_producto FROM ar_Moe";
-    pool_mysql.query(sql, (error, resultados) => {
-        if (error) return res.status(500).json({ error: "A ver Pasmao, que da fallo, no lo ves?" });
-        res.json(resultados);
-    });
-});
-
-server.get("/tienda-comics", (req, res) => {
-    const sql = "SELECT codigo, nombre_comic, serie_comic, numero_paginas FROM Tienda_Comics";
-    pool_mysql.query(sql, (error, resultados) => {
-        if (error) return res.status(500).json({ error: "Peor Base de Datos de la Historia" });
-        res.json(resultados);
-    });
-});
-
-server.get("/personajes-principales", (req, res) => {
-    const sql = "SELECT codigo_personaje, nombre, apellido1, madre, padre, actor_doblaje, primera_aparicion FROM Personajes_Principales";
-    pool_mysql.query(sql, (error, resultados) => {
-        if (error) return res.status(500).json({ error: "Mosquis aqui da fallo" });
-        res.json(resultados);
-    });
-});
-
-// Iniciar servidor
-pool_mysql.getConnection((error, connection) => {
-    if (error) {
-        console.error("Error conectando a MySQL:", error.message);
-        process.exit(1);
-    }
-    connection.release();
-    server.listen(PORT, () => {
-        console.log(`Servidor en http://localhost:${PORT}`);
-        console.log(`Inicio en: http://localhost:${PORT}/index.html`)
-        console.log(`Productos baratos en: http://localhost:${PORT}/pages/badulaque.html`);
-        console.log(`Cogorzas baratas en:http://localhost:${PORT}/pages/barMoe.html`)
+        res.json({ mensaje: "Personaje eliminado" });
     });
 });
