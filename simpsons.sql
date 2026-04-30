@@ -65,9 +65,8 @@ CREATE TABLE Personajes_Principales_beben_Bar_Moe (
     FOREIGN KEY (codigo_bar_moe) REFERENCES Bar_Moe(codigo)
 ) ENGINE=INNODB;
 
----
+
 -- INSERCIÓN DE DATOS
----
 
 -- Badulaque
 INSERT INTO badulaque (codigo, nombre_producto) VALUES 
