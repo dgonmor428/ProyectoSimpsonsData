@@ -125,7 +125,7 @@ server.delete("/barMoe/:codigo", (req, res) => {
 
 
 
-server.get("/tienda-comics", (req, res) => {
+server.get("/tiendaComics", (req, res) => {
     const nombre = req.query.nombre;
     let sql = "SELECT * FROM Tienda_Comics";
     let valores = [];
@@ -141,7 +141,7 @@ server.get("/tienda-comics", (req, res) => {
     });
 });
 
-server.post("/tienda-comics", (req, res) => {
+server.post("/tiendaComics", (req, res) => {
     const { codigo, nombre_comic, serie_comic, numero_paginas } = req.body;
 
     const sql = "INSERT INTO Tienda_Comics VALUES (?, ?, ?, ?)";
@@ -152,7 +152,7 @@ server.post("/tienda-comics", (req, res) => {
     });
 });
 
-server.put("/tienda-comics/:codigo", (req, res) => {
+server.put("/tiendaComics/:codigo", (req, res) => {
     const codigo = req.params.codigo;
     const { nombre_comic, serie_comic, numero_paginas } = req.body;
 
@@ -164,7 +164,7 @@ server.put("/tienda-comics/:codigo", (req, res) => {
     });
 });
 
-server.delete("/tienda-comics/:codigo", (req, res) => {
+server.delete("/tiendaComics/:codigo", (req, res) => {
     const codigo = req.params.codigo;
 
     const sql = "DELETE FROM Tienda_Comics WHERE codigo=?";
@@ -177,7 +177,7 @@ server.delete("/tienda-comics/:codigo", (req, res) => {
 
 
 
-server.get("/personajes-principales", (req, res) => {
+server.get("/personajes", (req, res) => {
     const nombre = req.query.nombre;
     let sql = "SELECT * FROM Personajes_Principales";
     let valores = [];
@@ -193,7 +193,7 @@ server.get("/personajes-principales", (req, res) => {
     });
 });
 
-server.post("/personajes-principales", (req, res) => {
+server.post("/personajes", (req, res) => {
     const { codigo_personaje, nombre, apellido1, madre, padre, actor_doblaje, primera_aparicion } = req.body;
 
     const sql = "INSERT INTO Personajes_Principales VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -207,7 +207,7 @@ server.post("/personajes-principales", (req, res) => {
     );
 });
 
-server.put("/personajes-principales/:id", (req, res) => {
+server.put("/personajes/:id", (req, res) => {
     const id = req.params.id;
     const { nombre, apellido1, madre, padre, actor_doblaje, primera_aparicion } = req.body;
 
@@ -222,7 +222,7 @@ server.put("/personajes-principales/:id", (req, res) => {
     );
 });
 
-server.delete("/personajes-principales/:id", (req, res) => {
+server.delete("/personajes/:id", (req, res) => {
     const id = req.params.id;
 
     const sql = "DELETE FROM Personajes_Principales WHERE codigo_personaje=?";
