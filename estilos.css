@@ -192,7 +192,6 @@ footer img{
 
 
 
-/*Estilos del Badulaque (Alejandro)*/
 
 .badulaque-body {
     font-family: Arial, sans-serif;
@@ -284,7 +283,7 @@ footer img{
    
 }
 
-/*Estilos del Bar de Moe (Alejandro)*/
+
 .bardemoe-body {
     font-family: Arial, sans-serif;
     background-color: #3d2506;
@@ -362,7 +361,7 @@ footer img{
    
 }
 
-/*Estilos Personajes (David)*/
+
 
 .personajes-body {
     font-family: Arial, sans-serif;
@@ -448,7 +447,6 @@ footer img{
     color: #FED41D;
 }
 
-/*Estilos Tienda de Comics (David)*/
 
 .comics-body {
     font-family: Arial, sans-serif;
@@ -534,7 +532,7 @@ footer img{
     color: #FED41D;
 }
 
-/*Estilos Sobre Nosotros (David)*/
+
 .introduccion-nosotros{
     text-align: center;
     color: #1A1A2E;
@@ -678,7 +676,7 @@ footer img{
 
 }
 
-/*Navegador y texto de botones (Alejandro)*/
+
 
 .navegadorPage {
     display: flex;
@@ -759,4 +757,77 @@ footer img{
     margin-top: 20px;
     margin-left: 15px;
 
+}
+
+
+.linkComic {
+    color: white !important;          
+    text-decoration: none !important; 
+    display: flex;                 
+    width: 100%;
+    height: 100%;
+     margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.comics-grid {
+    display: flex;
+    flex-wrap: column;       
+    justify-content: center; 
+    gap: 20px;             
+    padding: 20px;
+}
+
+
+.btn-leer {
+    background: none;
+    border: 3px solid #000; 
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    width: 200px;           
+    height: 300px;          
+    transition: transform 0.3s;
+   background: none;
+    display: inline;
+}
+
+.btn-leer:hover {
+    transform: scale(1.05); 
+    border-color: #f2e85e;  
+}
+
+
+.btn-leer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      
+    display: block;
+}
+
+.lector-comic {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto; 
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+.scribd_iframe_embed {
+    width: 100% !important;
+    height: 85vh !important; 
+    border: 4px solid #000;  
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.lector-comic p {
+    text-align: center;
+    background: #fff;
+    padding: 10px;
+    margin-top: 0 !important;
+    border: 2px solid #000;
+    border-top: none;
 }
