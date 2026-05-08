@@ -255,7 +255,7 @@ footer img{
     flex-direction: row;
     gap: 20px;
     background-color: #F2B880;
-    width: 20%;
+    flex:1;
 }
 
 .badulaque-botones{
@@ -333,7 +333,7 @@ footer img{
     flex-direction: row;
     gap: 20px;
     background-color: #00351a;
-    width: 20%;
+    flex:1;
 }
 
 .bardemoe-botones{
@@ -420,7 +420,7 @@ footer img{
     flex-direction: row;
     gap: 20px;
     background-color: #FED41D;
-    width: 20%;
+    flex:1;
 }
 
 .personajes-botones{
@@ -506,7 +506,7 @@ footer img{
     flex-direction: row;
     gap: 20px;
     background-color: #2d0057;
-    width: 20%;
+    flex:1;
 }
 
 .comics-botones{
@@ -702,11 +702,9 @@ footer img{
 }
 
 .texto-boton{
-   
     font-family: 'Simpson', sans-serif;
     margin-top: 50px;
     color: #FED41D;
-    
 }
 
 .boton-pagina{
@@ -714,7 +712,6 @@ footer img{
 }
 
 .CRUD-box{
-    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -722,4 +719,44 @@ footer img{
 
 .mensaje p{
     display: inline;
+}
+
+/*Parte grid de los productos de la base de datos*/
+#mensajesalida {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 20px;
+    flex: 1;
+}
+
+.grid-item {
+    background-color: #e6e4e4;
+    border-radius: 12px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+ 
+.grid-item p {
+    margin: 0;
+    font-size: small;
+    color: black;
+    font-family: Arial, sans-serif;
+}
+ 
+.grid-item p strong {
+    color: #D12B2B;
+}
+
+/*Buscador*/
+.buscador{
+    font-size: medium;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 20px;
+    margin-left: 15px;
+
 }

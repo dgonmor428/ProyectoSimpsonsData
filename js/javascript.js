@@ -20,10 +20,15 @@ setTimeout(() => {
 
 document.addEventListener("DOMContentLoaded", function () {
     //DOM
+    //Para las imagenes
     const btnCambiarAtributo = document.getElementById("btnCambiarAtributo");
     const imagencambiar = document.getElementById("imagen-cambiar");
+    //Para los botones de cada pestaña
     const botonMostrarTodo = document.getElementById("botonmostrartodo");
     const botonBuscar = document.getElementById("botonbusquedaporproducto");
+    const busquedapornombre = document.getElementById("busquedapornombre");
+    const busquedapornombre_producto = document.getElementById("busquedapornombre_producto");
+    const busquedapornombre_comic = document.getElementById("busquedapornombre_comic");
     const botonInsertar = document.getElementById("botoninsertarproducto");
     const botonEliminar = document.getElementById("botoneliminarproducto");
     const botonActualizar = document.getElementById("botonactualizarproducto");
@@ -46,11 +51,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function lenguajes() {
         const imagenes = [
-            "../imagenes/logo_CSS3.svg",
-            "../imagenes/logo_JavaScript.svg",
-            "../imagenes/logo_HTML5.svg",
+            "../imagenes/css.webp",
+            "../imagenes/js.webp",
             "../imagenes/NodeJS.png",
-            "../imagenes/Mysql.png"
+            "../imagenes/Mysql.png",
+            "../imagenes/html5-logo.webp"
         ];
         imagencambiar.src = imagenes[imagenmostrada];
         imagenmostrada = (imagenmostrada + 1) % 5;
@@ -60,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         salida.innerHTML = "";
 
         if (productos.length === 0) {
-            salida.innerHTML = "<p>No hay productos</p>";
+            salida.innerHTML = "<p>No existe ningún dato relacionado. Por favor introduce otro dato correctamente.</p>";
         } else {
             productos.forEach(p => {
                 let div = document.createElement("div");
@@ -72,6 +77,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         <p><strong>Apellido:</strong> ${p.apellido1}</p>
                         <p><strong>Madre:</strong> ${p.madre}</p>
                         <p><strong>Padre:</strong> ${p.padre}</p>
+                        <p><strong>Actor:</strong> ${p.actor_doblaje}</p>
+                        <p><strong>Primera_aparicion:</strong> ${p.primera_aparicion}</p>
                     `;
                 } else if (pagina.includes("tiendaComics")) {
                     div.innerHTML = `
@@ -99,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
         switch (filtro) {
             case "nombre":
                 if (pagina.includes("tiendaComics")) {
-                    ENDPOINT_SERVER_PRODUCTOS.searchParams.set('nombre_comic', valor);
+                    ENDPOINT_SERVER_PRODUCTOS.searchParams.set('nombre', valor);
                 } else {
                     ENDPOINT_SERVER_PRODUCTOS.searchParams.set('nombre', valor);
                 }
@@ -122,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    function insertarDato(producto) {
+    function insertarDato(dato) {
         const ENDPOINT_SERVER_PUERTO = new URL(ENDPOINT_SERVER);
         ENDPOINT_SERVER_PUERTO.port = PORT;
 
@@ -133,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(producto)
+            body: JSON.stringify(dato)
         })
         .then(respuesta_servidor => {
             if (!respuesta_servidor.ok) {
@@ -152,11 +159,17 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    function eliminarProducto(dato) {
+    function eliminarProducto(producto) {
         const ENDPOINT_SERVER_PUERTO = new URL(ENDPOINT_SERVER);
         ENDPOINT_SERVER_PUERTO.port = PORT;
 
-        const ENDPOINT_SERVER_ELIMINAR_PRODUCTOS = new URL(ENDPOINT_DATOS + `/${dato.codigo}`+ `/${dato.codigo_personaje}` ,ENDPOINT_SERVER_PUERTO);
+        let ENDPOINT_SERVER_ELIMINAR_PRODUCTOS;
+
+        if (pagina.includes("personajes")) {
+            ENDPOINT_SERVER_ELIMINAR_PRODUCTOS = new URL(ENDPOINT_DATOS + `/${producto.codigo_personaje}`, ENDPOINT_SERVER_PUERTO);
+        } else {
+            ENDPOINT_SERVER_ELIMINAR_PRODUCTOS = new URL(ENDPOINT_DATOS + `/${producto.codigo}`, ENDPOINT_SERVER_PUERTO);
+        }
 
         fetch(ENDPOINT_SERVER_ELIMINAR_PRODUCTOS, {
             method: "DELETE"
@@ -178,19 +191,24 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    function actualizarDato(dato) {
+    function actualizarDato(producto) {
         const ENDPOINT_SERVER_PUERTO = new URL(ENDPOINT_SERVER);
         ENDPOINT_SERVER_PUERTO.port = PORT;
 
-        const ENDPOINT_SERVER_ACTUALIZAR_PRODUCTOS = new URL(ENDPOINT_DATOS + `/${dato.codigo}`, ENDPOINT_SERVER_PUERTO
-        );
+        let ENDPOINT_SERVER_ACTUALIZAR_PRODUCTOS;
+
+         if (pagina.includes("personajes")) {
+            ENDPOINT_SERVER_ACTUALIZAR_PRODUCTOS = new URL(ENDPOINT_DATOS + `/${producto.codigo_personaje}`, ENDPOINT_SERVER_PUERTO);
+        } else {
+            ENDPOINT_SERVER_ACTUALIZAR_PRODUCTOS = new URL(ENDPOINT_DATOS + `/${producto.codigo}`, ENDPOINT_SERVER_PUERTO);
+        }
 
         fetch(ENDPOINT_SERVER_ACTUALIZAR_PRODUCTOS, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(dato)
+            body: JSON.stringify(producto)
         })
         .then(respuesta_servidor => {
             if (!respuesta_servidor.ok) {
@@ -211,31 +229,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (btnCambiarAtributo) btnCambiarAtributo.addEventListener("click", lenguajes);
     if (botonMostrarTodo) botonMostrarTodo.addEventListener("click", () => consultarDatos());
-    if (botonBuscar) botonBuscar.addEventListener("click", () => consultarDatos());
+    //Busca por nombre de los personajes
+    if (botonBuscar) botonBuscar.addEventListener("click", () => {
+    consultarDatos("nombre", busquedapornombre.value.trim());
+    });
+    //Busca por nombre de los productos
+    if (botonBuscar) botonBuscar.addEventListener("click", () => {
+    consultarDatos("nombre", busquedapornombre_producto.value.trim());
+    });
+    //Busca por nombre de comic
+    if (botonBuscar) botonBuscar.addEventListener("click", () => {
+    consultarDatos("nombre", busquedapornombre_comic.value.trim());
+    });
     if (botonInsertar) botonInsertar.addEventListener("click", () => {
         let producto;
 
         if (pagina.includes("personajes")) {
             producto = {
-                codigo_personaje: 1111,
-                nombre: "Prueba00",
-                apellido1: "Prueba00",
-                madre: "Prueba00",
-                padre: "Prueba00",
+                codigo_personaje: 1234522242,
+                nombre: "Prueba01325",
+                apellido1: "Prueba01",
+                madre: "Prueba01",
+                padre: "Prueba01",
                 actor_doblaje: "Prueba00",
                 primera_aparicion: "Prueba00"
             };
         } else if (pagina.includes("tiendaComics")) {
             producto = {
-                codigo: 1111,
-                nombre_comic: "Prueba00",
-                serie_comic: "Prueba00",
+                codigo: 1111234,
+                nombre_comic: "Prueba001",
+                serie_comic: "Prueba001",
                 numero_paginas: 1111
             };
         } else {
             producto = {
-                codigo: 1111,
-                nombre_producto: "Prueba00"
+                codigo: 1010,
+                nombre_producto: "Prueba001"
             };
         }
 
@@ -247,11 +276,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (pagina.includes("personajes")) {
             producto = {
-                codigo_personaje: 111111
+                codigo_personaje: 1234522242
             };
         } else {
             producto = {
-                codigo: 111111
+                codigo: 1111234
             };
         }
 
@@ -263,8 +292,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (pagina.includes("personajes")) {
             producto = {
-                codigo_personaje: 99,
-                nombre: "PruebaNombre",
+                codigo_personaje: 2,
+                nombre: "PruebaNombrea123",
                 apellido1: "PruebaApellido",
                 madre: "PruebaMadre",
                 padre: "PruebaPadre",
@@ -273,19 +302,19 @@ document.addEventListener("DOMContentLoaded", function () {
             };
         } else if (pagina.includes("tiendaComics")) {
             producto = {
-                codigo: 999,
+                codigo: 510,
                 nombre_comic: "PruebaComicActualizado",
                 serie_comic: "PruebaSerieActualizada",
                 numero_paginas: 20
             };
         } else {
             producto = {
-                codigo: 999,
+                codigo: 1010,
                 nombre_producto: "ProductoActualizado"
             };
         }
 
-        actualizarProducto(producto);
+        actualizarDato(producto);
     });
 
 });

@@ -96,9 +96,8 @@ INSERT INTO Bar_Moe (codigo, nombre_producto) VALUES
 -- Tienda de Comics
 INSERT INTO Tienda_Comics (codigo, nombre_comic, serie_comic, numero_paginas) 
 VALUES 
-(500, 'Simpsons Comics #1', 'Simpsons Comics', 29),
-(501, 'La casa arbol del terror #7', 'Simpsons Comics', 29),
-(502, 'Simpsons Comics #139', 'Simpsons Comics', 29),
+(501, 'Simpsons Comics #1', 'Simpsons Comics', 29),
+(502, 'La casa arbol del terror #7', 'Simpsons Comics', 29),
 (503, 'Simpsons Comics #139', 'Simpsons Comics', 29),
 (504, 'Simpsons Comics #28', 'Simpsons Comics', 29),
 (505, 'Bartman #2', 'Simpsons Comics', 29),
