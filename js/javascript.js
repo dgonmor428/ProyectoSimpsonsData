@@ -307,7 +307,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //Eventos:
     //Botón para cambiar la imagen de los lenguajes de programación
     if (btnCambiarAtributo) btnCambiarAtributo.addEventListener("click", lenguajes);
-    btnCambiarVideo.addEventListener("click", videos);
+    if (btnCambiarVideo) btnCambiarVideo.addEventListener("click", videos);
     //Botón para mostrar una frase aleatoria de los simpsons
     if (frases) frases.addEventListener("click", FrasesSimpsons);
     //Botón para mostrar todos los datos
