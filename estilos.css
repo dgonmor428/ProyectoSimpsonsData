@@ -67,7 +67,7 @@ main {
     font-family: Simpsons;
     display: flex;
     justify-content: center;
-    gap: 200px;
+    gap: 5%;
     margin-left: 16px;
     padding: auto;
 }

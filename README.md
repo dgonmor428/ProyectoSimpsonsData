@@ -1,2 +1,0 @@
-# ProyectoSimpsonsData
-## Info de usuarios
