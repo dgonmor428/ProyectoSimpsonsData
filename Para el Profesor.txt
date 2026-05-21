@@ -1,0 +1,23 @@
+Buenas Fran, habrá paginas que capaz te salta error a la hora de insertar, eliminar o actualizar. 
+Eso para solucionarlo se hace en el JS a partir de la linea 340. Se puede ahí modificar el código de lo que quieras modificar. 
+Puede que no funcione por que los productos tienen distintos códigos, por eso a partir de esa página se puede cambiar. 
+Nosotros en vez de hacer copia y pega con el mismo código lo hemos simplificado usando condicionales. Aunque de esos errores y luego lo tengas que cambiar, 
+se obtiene a cambio un código más limpio y menos lioso para tanto nosotros y para ti. Para que lo entiendas mejor aquí tienes un ejemplo del código:
+
+if (document.querySelector(".comics-body")) {
+        ENDPOINT_DATOS = "tiendaComics";
+    }
+
+Comprueba si existe el elemento y se guarda en ese endpoint. Así no se crea varios endpoints. 
+Además, para insertar, eliminar o actualizar cualquier producto simplemente necesito compararlos ENDPOINT_DATOS === "personajes".
+
+Páginas usadas de donde hemos buscado información:
+https://desarrolloweb.org/
+https://manz.dev/
+https://developer.mozilla.org/
+y más páginas que no tenemos apuntadas. tenia otra que se llamaba desarrolloweb donde encontré lo del sonido pero la he perdido.
+
+Nota David: En las practicas estoy haciendo cursos de freecodecamp muy interesantes como
+https://www.freecodecamp.org/learn/2022/responsive-web-design/
+y
+https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/#basic-javascript

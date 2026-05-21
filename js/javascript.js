@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const botonEliminar = document.getElementById("botoneliminarproducto");
     const botonActualizar = document.getElementById("botonactualizarproducto");
     const salida = document.getElementById("mensajesalida");
-    const pagina = window.location.pathname;
     //Parte de la api externa DOM
     const endpoint_frases = "https://thesimpsonsapi.com/api/characters";
     const frases = document.querySelector(".boton-frase");
@@ -44,17 +43,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let ENDPOINT_DATOS = "";
 
-    if (pagina.includes("badulaque")) {
-        ENDPOINT_DATOS = "badulaque";
-    } 
-    else if (pagina.includes("barMoe")) {
-        ENDPOINT_DATOS = "barMoe";
-    } 
-    else if (pagina.includes("tiendaComics")) {
+    //Comprueba si existe cada elemento para saber en que página estoy y así asignar el endpoint correspondiente a cada uno.
+    if (document.querySelector(".comics-body")) {
         ENDPOINT_DATOS = "tiendaComics";
-    } 
-    else if (pagina.includes("personajes")) {
+    }
+    else if (document.querySelector(".personajes-body")) {
         ENDPOINT_DATOS = "personajes";
+    }
+    else if (document.querySelector(".badulaque-body")) {
+        ENDPOINT_DATOS = "badulaque";
+    }
+    else if (document.querySelector(".bardemoe-body")) {
+        ENDPOINT_DATOS = "barMoe";
     }
 
     /**
@@ -72,9 +72,9 @@ document.addEventListener("DOMContentLoaded", function () {
         imagenmostrada = (imagenmostrada + 1) % 5;
     }
 
- /**
-  * @brief Funcion para cambiar de clips, a alegir entre el viejo Judio en calzoncillos, la cancion del Badulaque y la del monorail
-  */
+    /**
+    * @brief Funcion para cambiar de clips, a alegir entre el viejo Judio en calzoncillos, la cancion del Badulaque y la del monorail
+    */
     function videos() {
         const videos = [
             "../videos/monorail.mp4",
@@ -82,9 +82,8 @@ document.addEventListener("DOMContentLoaded", function () {
             "../videos/yeguagris.mp4",
         ];
       videocambiar.src = videos[videomostrado];
-        videomostrado = (videomostrado + 1) % videos.length;
+        videomostrado = (videomostrado + 1) % 3;
     }
-
 
     /**
      * @brief Saca una frase aleatoria de Los Simpsons (API)
@@ -135,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let div = document.createElement("div");
                 div.classList.add("grid-item");
 
-                if (pagina.includes("personajes")) {
+                if (ENDPOINT_DATOS === "personajes") {
                     div.innerHTML = `
                         <p><strong>Nombre:</strong> ${p.nombre}</p>
                         <p><strong>Apellido:</strong> ${p.apellido1}</p>
@@ -144,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <p><strong>Actor:</strong> ${p.actor_doblaje}</p>
                         <p><strong>Primera_aparicion:</strong> ${p.primera_aparicion}</p>
                     `;
-                } else if (pagina.includes("tiendaComics")) {
+                } else if (ENDPOINT_DATOS === "tiendaComics") {
                     div.innerHTML = `
                         <p><strong>Nombre:</strong> ${p.nombre_comic}</p>
                         <p><strong>Serie:</strong> ${p.serie_comic}</p>
@@ -173,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         switch (filtro) {
             case "nombre":
-                if (pagina.includes("tiendaComics")) {
+                if (ENDPOINT_DATOS === "tiendaComics") {
                     ENDPOINT_SERVER_PRODUCTOS.searchParams.set('nombre', valor);
                 } else {
                     ENDPOINT_SERVER_PRODUCTOS.searchParams.set('nombre', valor);
@@ -239,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let ENDPOINT_SERVER_ELIMINAR_PRODUCTOS;
 
-        if (pagina.includes("personajes")) {
+        if (ENDPOINT_DATOS === "personajes") {
             ENDPOINT_SERVER_ELIMINAR_PRODUCTOS = new URL(ENDPOINT_DATOS + `/${producto.codigo_personaje}`, ENDPOINT_SERVER_PUERTO);
         } else {
             ENDPOINT_SERVER_ELIMINAR_PRODUCTOS = new URL(ENDPOINT_DATOS + `/${producto.codigo}`, ENDPOINT_SERVER_PUERTO);
@@ -274,7 +273,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let ENDPOINT_SERVER_ACTUALIZAR_PRODUCTOS;
 
-         if (pagina.includes("personajes")) {
+         if (ENDPOINT_DATOS === "personajes") {
             ENDPOINT_SERVER_ACTUALIZAR_PRODUCTOS = new URL(ENDPOINT_DATOS + `/${producto.codigo_personaje}`, ENDPOINT_SERVER_PUERTO);
         } else {
             ENDPOINT_SERVER_ACTUALIZAR_PRODUCTOS = new URL(ENDPOINT_DATOS + `/${producto.codigo}`, ENDPOINT_SERVER_PUERTO);
@@ -341,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (botonInsertar) botonInsertar.addEventListener("click", () => {
         let producto;
 
-        if (pagina.includes("personajes")) {
+        if (ENDPOINT_DATOS === "personajes") {
             producto = {
                 codigo_personaje: 1234522242,
                 nombre: "Prueba01325",
@@ -351,7 +350,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 actor_doblaje: "Prueba00",
                 primera_aparicion: "Prueba00"
             };
-        } else if (pagina.includes("tiendaComics")) {
+        } else if (ENDPOINT_DATOS === "tiendaComics") {
             producto = {
                 codigo: 1111234,
                 nombre_comic: "Prueba001",
@@ -360,7 +359,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
         } else {
             producto = {
-                codigo: 1010,
+                codigo: 101020,
                 nombre_producto: "Prueba001"
             };
         }
@@ -373,7 +372,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (botonEliminar) botonEliminar.addEventListener("click", () => {
         let producto;
 
-        if (pagina.includes("personajes")) {
+        if (ENDPOINT_DATOS === "personajes") {
             producto = {
                 codigo_personaje: 1234522242
             };
@@ -391,7 +390,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (botonActualizar) botonActualizar.addEventListener("click", () => {
         let producto;
 
-        if (pagina.includes("personajes")) {
+        if (ENDPOINT_DATOS === "personajes") {
             producto = {
                 codigo_personaje: 2,
                 nombre: "PruebanombreActualizado",
@@ -401,7 +400,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 actor_doblaje: "PruebaActor",
                 primera_aparicion: "PruebaAparicion"
             };
-        } else if (pagina.includes("tiendaComics")) {
+        } else if (ENDPOINT_DATOS === "tiendaComics") {
             producto = {
                 codigo: 510,
                 nombre_comic: "PruebaComicActualizado",
